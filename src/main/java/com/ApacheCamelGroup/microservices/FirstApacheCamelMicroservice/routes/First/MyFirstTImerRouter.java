@@ -3,10 +3,14 @@ package com.ApacheCamelGroup.microservices.FirstApacheCamelMicroservice.routes.F
 import java.time.LocalDateTime;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MyFirstTImerRouter extends RouteBuilder {
+	
+	@Autowired
+	private GetCurrentTimeBean getCurrentTimeBean;
 
 	@Override
 	public void configure() throws Exception {
@@ -15,7 +19,7 @@ public class MyFirstTImerRouter extends RouteBuilder {
 		//transformation - making changes to the message that comes in from the queue 
 		//database - save the tranformed message ( for tutorial purposes we will utilise logs)
 		from("timer:first-timer")
-		.bean("getCurrentTimeBean")
+		.bean(getCurrentTimeBean)
 		.to("log:first-timer");
 	}
 	
