@@ -13,6 +13,7 @@ public class MyFirstTImerRouter extends RouteBuilder {
 		//transformation - making changes to the message that comes in from the queue 
 		//database - save the tranformed message ( for tutorial purposes we will utilise logs)
 		from("timer:first-timer")
+		.transform().constant("My constant message")
 		.to("log:first-timer");
 	}
 	
